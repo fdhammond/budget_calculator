@@ -76,7 +76,7 @@ const NewBudget = ({
             <option value="freetime">-- Free Time --</option>
             <option value="health">-- Health --</option>
             <option value="subscriptions">-- Subscriptions --</option>
-            <option value="expenses">--Expenses--</option>
+            <option value="expenses">-- Expenses --</option>
           </select>
         </div>
         <input type="submit" value="Add Expense" />
