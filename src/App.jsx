@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import ExpensesList from "./components/ExpensesList";
 import NewBudget from "./components/NewBudget";
@@ -11,6 +11,17 @@ function App() {
   const [newBudget, setNewBudget] = useState(false);
   const [animateNewBudget, setAnimateNewBudget] = useState(false);
   const [expenses, setExpenses] = useState([]);
+  const [expensesEdit, setExpensesEdit] = useState({});
+
+  useEffect(() => {
+    if (Object.keys(expensesEdit).length > 0) {
+      setNewBudget(true);
+      setExpensesEdit({});
+      setTimeout(() => {
+        setAnimateNewBudget(true);
+      }, 500);
+    }
+  }, [expensesEdit]);
 
   const handleNewBudget = () => {
     setNewBudget(true);
@@ -31,8 +42,9 @@ function App() {
   };
 
   return (
-    <div className={newBudget && "fijar"}>
+    <div className={newBudget ? "fijar" : ""}>
       <Header
+        expenses={expenses}
         budget={budget}
         setBudget={setBudget}
         isValidBudget={isValidBudget}
@@ -42,7 +54,10 @@ function App() {
       {isValidBudget && (
         <>
           <main>
-            <ExpensesList expenses={expenses} />
+            <ExpensesList
+              expenses={expenses}
+              setExpensesEdit={setExpensesEdit}
+            />
           </main>
           <div className="nuevo-gasto">
             <img
@@ -59,6 +74,7 @@ function App() {
           animateNewBudget={animateNewBudget}
           setAnimateNewBudget={setAnimateNewBudget}
           saveExpense={saveExpense}
+          expensesEdit={expensesEdit}
         />
       )}
     </div>

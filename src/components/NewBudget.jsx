@@ -1,5 +1,5 @@
 import Message from "./Message";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CerrarBtn from "../img/cerrar.svg";
 
 const NewBudget = ({
@@ -7,11 +7,20 @@ const NewBudget = ({
   animateNewBudget,
   setAnimateNewBudget,
   saveExpense,
+  expensesEdit,
 }) => {
   const [message, setMessage] = useState("");
   const [name, setName] = useState("");
   const [quantity, setQuantity] = useState("");
   const [category, setCategory] = useState("");
+
+  useEffect(() => {
+    if (Object.keys(expensesEdit).length > 0) {
+      setName(expensesEdit.name);
+      setQuantity(expensesEdit.quantity);
+      setCategory(expensesEdit.category);
+    }
+  }, []);
 
   const hideNewBudget = () => {
     setAnimateNewBudget(false);
