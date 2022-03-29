@@ -4,17 +4,23 @@ import ControlBudget from "./ControlBudget";
 
 const Header = ({
   expenses,
+  setExpenses,
   budget,
   setBudget,
   isValidBudget,
   setIsValidBudget,
-  expense,
 }) => {
   return (
     <header>
       <h1>Budget Calculator</h1>
       {isValidBudget ? (
-        <ControlBudget expenses={expenses} budget={budget} />
+        <ControlBudget
+          expenses={expenses}
+          setExpenses={setExpenses}
+          budget={budget}
+          setBudget={setBudget}
+          setIsValidBudget={setIsValidBudget}
+        />
       ) : (
         <Budget
           budget={budget}

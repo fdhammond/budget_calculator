@@ -22,7 +22,7 @@ html {
   box-sizing: inherit;
 }
 
-.fijar {
+.lock {
   overflow: hidden;
   height: 100vh;
 }
@@ -207,7 +207,7 @@ header h1 {
 }
 .contenido-presupuesto p.negativo,
 .contenido-presupuesto p.negativo span {
-  color: red;
+  color: #dc2626;
 }
 .contenido-presupuesto span {
   font-weight: 900;
@@ -381,7 +381,7 @@ body .modal {
 }
 
 .CircularProgressbar .CircularProgressbar-text {
-  font-size: 1rem !important;
+  font-size: 0.9rem !important;
 }
 
 /*** SWIPE LIST OVERRIDES **/

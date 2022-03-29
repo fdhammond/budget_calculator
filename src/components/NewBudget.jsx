@@ -8,22 +8,28 @@ const NewBudget = ({
   setAnimateNewBudget,
   saveExpense,
   expensesEdit,
+  setExpensesEdit,
 }) => {
   const [message, setMessage] = useState("");
   const [name, setName] = useState("");
   const [quantity, setQuantity] = useState("");
   const [category, setCategory] = useState("");
+  const [date, setDate] = useState("");
+  const [id, setId] = useState("");
 
   useEffect(() => {
     if (Object.keys(expensesEdit).length > 0) {
       setName(expensesEdit.name);
       setQuantity(expensesEdit.quantity);
       setCategory(expensesEdit.category);
+      setId(expensesEdit.id);
+      setDate(expensesEdit.date);
     }
   }, []);
 
   const hideNewBudget = () => {
     setAnimateNewBudget(false);
+    setExpensesEdit({});
     setTimeout(() => {
       setNewBudget(false);
     }, 500);
@@ -39,7 +45,7 @@ const NewBudget = ({
       }, 3000);
       return;
     }
-    saveExpense({ name, quantity, category });
+    saveExpense({ name, quantity, category, id, date });
   };
 
   return (
@@ -50,7 +56,7 @@ const NewBudget = ({
       <form
         onSubmit={handleSubmit}
         className={`formulario ${animateNewBudget ? "animar" : "cerrar"}`}>
-        <legend>New Budget</legend>
+        <legend>{expensesEdit.name ? "Editing Expense" : "New Expense"}</legend>
         {message && <Message tipo="error">{message}</Message>}
         <div className="campo">
           <label htmlFor="name">Name Expense</label>
@@ -88,7 +94,10 @@ const NewBudget = ({
             <option value="expenses">-- Expenses --</option>
           </select>
         </div>
-        <input type="submit" value="Add Expense" />
+        <input
+          type="submit"
+          value={expensesEdit.name ? "Save Changes" : "Add Expense"}
+        />
       </form>
     </div>
   );
